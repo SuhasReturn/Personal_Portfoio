@@ -32,9 +32,7 @@ export default function Contact() {
     setSubmitting(true);
     try {
       const res = await axios.post(`${BACKEND}/api/contact`, data);
-      toast.success(res.data.message || "Message sent!", {
-        description: "I'll get back to you shortly.",
-      });
+      toast.success(res.data.message || "Message sent!");
       reset();
     } catch (e) {
       const msg =
