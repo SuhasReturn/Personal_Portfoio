@@ -1,0 +1,114 @@
+{
+  "theme_strategy": {
+    "type": "dark",
+    "background": "#0D0D11",
+    "description": "Pitch-black background with a dynamic canvas layer. Deep purple accents (#7B2CBF) act as structural lighting, while toxic neon green (#39FF14) and hot pink (#FF00FF) serve as high-contrast interactive highlights. The overall aesthetic mimics Noomo Labs - highly immersive, WebGL-driven feel, deep contrast, and neon emissions."
+  },
+  "colors": {
+    "background": "#0D0D11",
+    "foreground": "#FFFFFF",
+    "primary": "#39FF14",
+    "primary_foreground": "#0D0D11",
+    "secondary": "#7B2CBF",
+    "secondary_foreground": "#FFFFFF",
+    "accent": "#FF00FF",
+    "accent_foreground": "#FFFFFF",
+    "muted": "#1A1A24",
+    "muted_foreground": "#A0A0AB",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "glass": "rgba(255, 255, 255, 0.03)"
+  },
+  "typography": {
+    "headings": {
+      "family": "Unbounded",
+      "weights": ["400", "700", "900"],
+      "usage": "Use for massive hero intros, section titles, and high-impact numerical data. Use tracking-tighter for massive text."
+    },
+    "body": {
+      "family": "Manrope",
+      "weights": ["400", "500"],
+      "usage": "For readable paragraphs, contact form labels, and descriptive text."
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "weights": ["400"],
+      "usage": "For technical tags, GitHub repos, sub-labels, and decorative tech elements."
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": "Ultra-minimalist. Background: `bg-white/[0.02]`. Backdrop Blur: `backdrop-blur-xl`. Border: `border border-white/10`. No muddy grays. Use optical clarity to let the dynamic canvas bleed through.",
+    "neon_bloom": "For interactive highlights (like hovering a project card): `shadow-[0_0_30px_rgba(57,255,20,0.4)]` or for pink: `shadow-[0_0_30px_rgba(255,0,255,0.4)]`. Combine with a border color shift.",
+    "textures": "Include a subtle noise/grain overlay spanning the entire viewport (`pointer-events-none mix-blend-overlay opacity-20`) to prevent digital flatness."
+  },
+  "3d_and_motion": {
+    "libraries_required": [
+      "framer-motion",
+      "@react-three/fiber",
+      "@react-three/drei",
+      "lenis"
+    ],
+    "smooth_scroll": "Lenis is MANDATORY. The portfolio must use Lenis for buttery smooth momentum scrolling to achieve the high-end agency feel.",
+    "dynamic_canvas": "A fixed full-screen R3F canvas or framer-motion particle system in the background (`z-[-1]`), creating depth and subtle movement behind the glass panels.",
+    "hero_avatar": "Top center interactive container. Use Framer Motion `useMotionValue`, `useSpring`, and `useTransform` to track the cursor and apply a 3D perspective tilt (`rotateX`, `rotateY`) to a DOM element OR use R3F to render an actual 3D Icosahedron/Torus that tracks the mouse.",
+    "horizontal_scroll": "The 'My Projects' section must use Framer Motion's `useScroll` on a target container to map vertical scroll progress to horizontal translation of the project cards array."
+  },
+  "layouts_and_grids": {
+    "hero": "Absolute/Fluid structure. 100vw/100vh viewport. The 3D avatar container is top-center. Text floats dynamically.",
+    "about": "Asymmetrical bento-style glassmorphism panels. Use `grid-cols-1 md:grid-cols-12` with wide gaps (`gap-8`). Varying spans to create tension.",
+    "projects": "Sticky container taking up `h-[300vh]`. Inside, a horizontal track of massive project cards that glide laterally. Cards should be tall (`aspect-[3/4]` or similar).",
+    "contact": "Minimalist, centered glassmorphism card. Strict alignment. Floating labels or stark mono inputs."
+  },
+  "component_instructions": {
+    "audio_toggle": "A fixed floating button (e.g., bottom-right). Styling: Minimalist icon (Lucide `Volume2` / `VolumeX`). Decorative disabled state or visual-only toggle (turns on/off background particle speed, since audio was skipped).",
+    "projects_card": "On hover: Scale up slightly (`scale-105`), trigger vibrant neon color-shift (`border-primary`), and add emissive bloom drop shadow. Use Framer Motion for the layout transition.",
+    "contact_form": "Use `react-hook-form` + `zod` for validation. Inputs must have `bg-transparent border-b border-white/20` focus: `border-primary focus:shadow-[0_4px_20px_rgba(57,255,20,0.2)]`. No default HTML validation bubbles. Toast notifications via `sonner` for success/error."
+  },
+  "image_urls": {
+    "projects": [
+      {
+        "url": "https://images.unsplash.com/photo-1580529352988-5236c86b9439",
+        "description": "Abstract neon rings, use as Project 1 thumbnail",
+        "category": "project_thumbnail"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1659040456574-8c10cadc1dd8",
+        "description": "Red/Purple geometric abstraction, use as Project 2 thumbnail",
+        "category": "project_thumbnail"
+      },
+      {
+        "url": "https://images.pexels.com/photos/15680091/pexels-photo-15680091.jpeg",
+        "description": "Neon blue light in dark setting, use as Project 3 thumbnail",
+        "category": "project_thumbnail"
+      },
+      {
+        "url": "https://images.pexels.com/photos/13594333/pexels-photo-13594333.jpeg",
+        "description": "Glowing neon triangle, use as Project 4 thumbnail",
+        "category": "project_thumbnail"
+      }
+    ]
+  },
+  "accessibility_and_testing": {
+    "testing_attributes": "All interactive and key informational elements MUST include a `data-testid` attribute (e.g., `data-testid=\"audio-toggle\"`, `data-testid=\"contact-submit\"`).",
+    "contrast": "Ensure text over the pitch-black and dynamic canvas maintains at least 4.5:1 contrast. Glass panels need enough opacity or backdrop-blur to keep text legible."
+  },
+  "instructions_to_main_agent": [
+    "1. Initialize React app with Tailwind CSS.",
+    "2. Install required fonts from Google Fonts: Unbounded, Manrope, JetBrains Mono.",
+    "3. Install dependencies: framer-motion, @react-three/fiber, @react-three/drei (or three), lucide-react, lenis, sonner, react-hook-form, zod, @hookform/resolvers, clsx, tailwind-merge.",
+    "4. Apply the dark theme globally in index.css. Set body background to #0D0D11.",
+    "5. Implement a global smooth scroll wrapper using Lenis.",
+    "6. Build the dynamic canvas background: A fixed full-screen div rendering R3F particles or floating geometries.",
+    "7. Build the Hero: 100vh height. Include the 3D interactive avatar (Torus/Icosahedron) in a container that listens to mouse moves and tilts via framer-motion spring physics or R3F useFrame.",
+    "8. Build the Projects section: Implement horizontal scrolling using framer-motion's useScroll on a tall wrapper to map scroll-Y to translateX.",
+    "9. Add the floating audio toggle (visual only decorative).",
+    "10. NEVER use placehold.it or dummyimage.com. Use the provided Unsplash/Pexels URLs for projects."
+  ],
+  "universal_guidelines_for_main_agent": [
+    "Do not converge toward generic 'AI slop' aesthetics. Push the envelope.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Every interaction needs micro-animations - hover states, transitions. Static = dead.",
+    "Never apply universal transitions like 'transition: all'. It breaks 3D transforms.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "NEVER use generic emoji icons like 🤖🧠💭. Use Lucide icons."
+  ]
+}
