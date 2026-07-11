@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import axios from "axios";
 
@@ -43,27 +43,50 @@ export default function Projects() {
   useEffect(() => {
     const compute = () => {
       if (!trackRef.current) return;
-      const trackWidth = trackRef.current.scrollWidth;
+      const cards = trackRef.current.querySelectorAll(
+        "[data-testid^=project-card-]"
+      );
+      if (cards.length === 0) return;
+      // Sum card widths + gaps by measuring first/last card positions
+      const first = cards[0].getBoundingClientRect();
+      const last = cards[cards.length - 1].getBoundingClientRect();
+      // Current on-screen span (before any translation)
+      const currentTx = new DOMMatrixReadOnly(
+        getComputedStyle(trackRef.current).transform
+      ).m41;
+      // Un-translated left of first card:
+      const firstLeft = first.left - currentTx;
+      const lastRight = last.right - currentTx;
+      const contentSpan = lastRight - firstLeft;
       const viewport = window.innerWidth;
-      // extra 96px padding so the last card ends comfortably inside viewport
-      setMaxTranslate(Math.max(0, trackWidth - viewport + 96));
+      // Leave one card-width of trailing breathing room so the last card
+      // finishes comfortably inside the viewport, not glued to the edge.
+      const trailing = Math.min(200, viewport * 0.15);
+      const overflow = contentSpan - viewport + firstLeft + trailing;
+      setMaxTranslate(Math.max(0, overflow));
     };
     compute();
-    const t = setTimeout(compute, 400);
+    const t1 = setTimeout(compute, 200);
+    const t2 = setTimeout(compute, 600);
     window.addEventListener("resize", compute);
     return () => {
-      clearTimeout(t);
+      clearTimeout(t1);
+      clearTimeout(t2);
       window.removeEventListener("resize", compute);
     };
   }, [projects]);
 
   const rawX = useTransform(scrollYProgress, [0, 1], [0, -maxTranslate]);
-  const x = useSpring(rawX, { damping: 30, stiffness: 100, mass: 0.5 });
+  // No spring — direct 1:1 scroll → translate so cards finish translating
+  // exactly when the section un-pins. Otherwise the last cards get skipped.
+  const x = rawX;
 
-  // Section height: viewport + maxTranslate → 1:1 vertical scroll mapping to
-  // horizontal translation. When there is no overflow (mobile: not enough
-  // cards / desktop with few cards), the section is just one viewport tall.
-  const sectionHeight = maxTranslate > 0 ? `calc(100vh + ${maxTranslate}px)` : "100vh";
+  // Section height: viewport + maxTranslate → each pixel of vertical scroll
+  // becomes exactly one pixel of horizontal translation while the section is
+  // pinned. Once maxTranslate has been consumed, the page continues scrolling
+  // downward into the next section.
+  const sectionHeight =
+    maxTranslate > 0 ? `calc(100vh + ${maxTranslate}px)` : "100vh";
 
   return (
     <section
@@ -130,7 +153,7 @@ function ProjectCard({ project, image, index }) {
       data-testid={`project-card-${project.id}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="relative shrink-0 w-[300px] md:w-[440px] aspect-[3/4] rounded-2xl overflow-hidden glass group cursor-pointer"
+      className="relative shrink-0 w-[320px] md:w-[560px] aspect-[3/4] rounded-2xl overflow-hidden glass group cursor-pointer"
       style={{
         transition:
           "border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease",
