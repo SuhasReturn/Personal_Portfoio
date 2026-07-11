@@ -72,9 +72,11 @@ export default function Hero() {
         className="mt-6 text-white/70 text-center max-w-2xl text-base md:text-lg font-mono"
         data-testid="hero-tagline"
       >
-        Full-stack engineer & AI systems builder — crafting adaptive interfaces,
-        <span className="text-[#FF00FF]"> cognitive agents</span>, and
-        <span className="text-[#39FF14]"> immersive product experiences</span>.
+        Engineer building{" "}
+        <span className="text-[#FF00FF]">AI agents</span>, adaptive interfaces,
+        and{" "}
+        <span className="text-[#39FF14]">computer-vision systems</span> that
+        respect how people actually think.
       </motion.p>
 
       {/* Social row */}

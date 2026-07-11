@@ -5,8 +5,8 @@ import { Sparkles, Code2, Brain, Compass } from "lucide-react";
 const cards = [
   {
     icon: Brain,
-    title: "AI Systems",
-    body: "Building conversational agents, retrieval pipelines, and adaptive cognitive interfaces that respond to context — not just prompts.",
+    title: "AI Agents & LLM Systems",
+    body: "Behind VidyaGuide (personalized AI tutor) and Cognitive Chatbot — I build context-aware conversational agents with layered memory, retrieval pipelines, and intent modeling.",
     color: "#39FF14",
     span: "md:col-span-7",
     testId: "about-card-ai",
@@ -14,23 +14,23 @@ const cards = [
   {
     icon: Code2,
     title: "Full-Stack Craft",
-    body: "TypeScript, React, FastAPI, Node. I ship end-to-end products with obsessive attention to interaction detail.",
+    body: "FlowCell (visual pipeline orchestration) and MoneyMap (personal finance viz) shipped end-to-end. TypeScript, React, FastAPI, Node — obsessed with interaction detail and clean data flow.",
     color: "#FF00FF",
     span: "md:col-span-5",
     testId: "about-card-fullstack",
   },
   {
     icon: Compass,
-    title: "Human-Centered",
-    body: "Neuro-diverse UX research, accessibility engineering, and interfaces that flex around real cognitive load.",
+    title: "Adaptive & Accessible UX",
+    body: "Neuro-Diverse Adaptive AI reshapes web interfaces for dyslexia, ADHD, and cognitive load — proving accessibility isn't a compromise, it's the sharpest design constraint.",
     color: "#7B2CBF",
     span: "md:col-span-5",
     testId: "about-card-human",
   },
   {
     icon: Sparkles,
-    title: "Playful Systems",
-    body: "I treat every product like a small universe — with physics, mood, and moments that reward curiosity.",
+    title: "Computer Vision & Research",
+    body: "Fake Image Detection (forensic pixel analysis) and Visual Fatigue Analyzer (blink + gaze telemetry) — I love turning raw signal into decisions humans can trust.",
     color: "#39FF14",
     span: "md:col-span-7",
     testId: "about-card-play",
@@ -60,6 +60,25 @@ export default function About() {
             <span className="text-white/40">interfaces that</span>{" "}
             <span className="text-[#FF00FF]">think back.</span>
           </h2>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 max-w-5xl">
+            <p
+              className="md:col-span-8 text-white/70 text-base md:text-lg leading-relaxed"
+              data-testid="about-bio"
+            >
+              I&apos;m Suhas — an engineer working at the intersection of{" "}
+              <span className="text-[#39FF14]">AI systems</span>,{" "}
+              <span className="text-[#FF00FF]">adaptive UX</span>, and honest,
+              well-crafted product engineering. I&apos;ve shipped AI tutors,
+              cognitive chatbots, computer-vision research prototypes, and full
+              production web apps — always with the same question in mind: how
+              does this feel in a real human&apos;s hands?
+            </p>
+            <p className="md:col-span-4 text-white/50 text-sm leading-relaxed font-mono">
+              Based in India · Available for freelance & full-time roles ·
+              Currently exploring agentic systems, on-device inference, and
+              accessibility-first design.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
