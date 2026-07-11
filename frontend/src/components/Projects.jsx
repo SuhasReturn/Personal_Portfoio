@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowUpRight, Github, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import axios from "axios";
 
 const BACKEND = process.env.REACT_APP_BACKEND_URL;
@@ -45,15 +45,25 @@ export default function Projects() {
       if (!trackRef.current) return;
       const trackWidth = trackRef.current.scrollWidth;
       const viewport = window.innerWidth;
-      setMaxTranslate(Math.max(0, trackWidth - viewport + 64));
+      // extra 96px padding so the last card ends comfortably inside viewport
+      setMaxTranslate(Math.max(0, trackWidth - viewport + 96));
     };
     compute();
+    const t = setTimeout(compute, 400);
     window.addEventListener("resize", compute);
-    return () => window.removeEventListener("resize", compute);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("resize", compute);
+    };
   }, [projects]);
 
   const rawX = useTransform(scrollYProgress, [0, 1], [0, -maxTranslate]);
   const x = useSpring(rawX, { damping: 30, stiffness: 100, mass: 0.5 });
+
+  // Section height: viewport + maxTranslate → 1:1 vertical scroll mapping to
+  // horizontal translation. When there is no overflow (mobile: not enough
+  // cards / desktop with few cards), the section is just one viewport tall.
+  const sectionHeight = maxTranslate > 0 ? `calc(100vh + ${maxTranslate}px)` : "100vh";
 
   return (
     <section
@@ -61,16 +71,21 @@ export default function Projects() {
       id="projects"
       data-testid="projects-section"
       className="relative w-full"
-      style={{ height: `${Math.max(150, 100 + projects.length * 40)}vh` }}
+      style={{ height: sectionHeight }}
     >
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
         <div className="px-6 md:px-16 mb-10">
           <p className="font-mono text-xs uppercase tracking-[0.4em] text-[#FF00FF] mb-4">
             /02 — Selected Works
           </p>
-          <h2 className="font-display text-5xl md:text-7xl font-black tracking-tighter">
-            Things I&apos;ve <span className="text-[#39FF14]">shipped.</span>
-          </h2>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <h2 className="font-display text-5xl md:text-7xl font-black tracking-tighter">
+              Things I&apos;ve <span className="text-[#39FF14]">shipped.</span>
+            </h2>
+            <p className="font-mono text-xs uppercase tracking-widest text-white/50 max-w-xs">
+              Curated to only ⭑ starred repositories · {projects.length} of many
+            </p>
+          </div>
         </div>
 
         <motion.div
@@ -94,9 +109,9 @@ export default function Projects() {
         </motion.div>
 
         <div className="px-6 md:px-16 mt-8 flex items-center gap-2 text-white/40 font-mono text-xs uppercase tracking-widest">
-          <span>scroll</span>
+          <span>{maxTranslate > 0 ? "scroll" : "hover"}</span>
           <span className="w-8 h-px bg-white/20" />
-          <span>to reveal</span>
+          <span>{maxTranslate > 0 ? "to reveal" : "to explore"}</span>
         </div>
       </div>
     </section>
@@ -115,15 +130,15 @@ function ProjectCard({ project, image, index }) {
       data-testid={`project-card-${project.id}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="relative shrink-0 w-[300px] md:w-[420px] aspect-[3/4] rounded-2xl overflow-hidden glass group cursor-pointer"
+      className="relative shrink-0 w-[300px] md:w-[440px] aspect-[3/4] rounded-2xl overflow-hidden glass group cursor-pointer"
       style={{
-        transition: "border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease",
+        transition:
+          "border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease",
         borderColor: hover ? accent.color : "rgba(255,255,255,0.1)",
         boxShadow: hover ? `0 0 60px ${accent.shadow}` : "none",
         transform: hover ? "translateY(-8px)" : "translateY(0)",
       }}
     >
-      {/* Image */}
       <div className="absolute inset-0">
         <img
           src={image}
@@ -132,7 +147,7 @@ function ProjectCard({ project, image, index }) {
           className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500"
           style={{
             filter: hover
-              ? `saturate(1.6) hue-rotate(0deg)`
+              ? "saturate(1.6) hue-rotate(0deg)"
               : "saturate(0.4) hue-rotate(-20deg)",
           }}
         />
@@ -147,7 +162,6 @@ function ProjectCard({ project, image, index }) {
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-between p-6 md:p-8">
         <div className="flex items-start justify-between">
           <span
@@ -175,7 +189,7 @@ function ProjectCard({ project, image, index }) {
             )}
             {project.stars > 0 && (
               <span className="flex items-center gap-1 font-mono text-[10px] text-white/60">
-                <Star size={10} /> {project.stars}
+                <Star size={10} fill="#39FF14" stroke="#39FF14" /> {project.stars}
               </span>
             )}
           </div>
