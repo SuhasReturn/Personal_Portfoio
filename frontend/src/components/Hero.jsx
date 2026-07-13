@@ -40,7 +40,7 @@ export default function Hero() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39FF14] opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39FF14]" />
         </span>
-        Open to internships & remote roles
+        Open to internships & jobs
       </motion.div>
 
       {/* 3D avatar container */}
