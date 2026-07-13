@@ -60,7 +60,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <p className="font-mono text-xs uppercase tracking-[0.4em] text-[#FF00FF] mb-4">
-              /03 — Get In Touch
+              /04 — Get In Touch
             </p>
             <h2 className="font-display text-5xl md:text-6xl font-black tracking-tighter mb-6 leading-[0.95]">
               Let&apos;s build<br />

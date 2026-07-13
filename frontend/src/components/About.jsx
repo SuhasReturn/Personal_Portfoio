@@ -5,32 +5,32 @@ import { Sparkles, Code2, Brain, Compass } from "lucide-react";
 const cards = [
   {
     icon: Brain,
-    title: "AI Agents & LLM Systems",
-    body: "Behind VidyaGuide (personalized AI tutor) and Cognitive Chatbot — I build context-aware conversational agents with layered memory, retrieval pipelines, and intent modeling.",
+    title: "Java & Algorithms",
+    body: "Deep bench in Java and core Data Structures & Algorithms. I treat LeetCode as daily reps — clean, optimized, interview-grade patterns that scale beyond puzzles.",
     color: "#39FF14",
     span: "md:col-span-7",
     testId: "about-card-ai",
   },
   {
     icon: Code2,
-    title: "Full-Stack Craft",
-    body: "FlowCell (visual pipeline orchestration) and MoneyMap (personal finance viz) shipped end-to-end. TypeScript, React, FastAPI, Node — obsessed with interaction detail and clean data flow.",
+    title: "Frontend Craft",
+    body: "HTML, CSS, JavaScript, React, TypeScript. Sharpened during a Frontend Web Developer internship at CodeVertex (Pune) and shipped in projects like FlowCell and Aureus.",
     color: "#FF00FF",
     span: "md:col-span-5",
     testId: "about-card-fullstack",
   },
   {
     icon: Compass,
-    title: "Adaptive & Accessible UX",
-    body: "Neuro-Diverse Adaptive AI reshapes web interfaces for dyslexia, ADHD, and cognitive load — proving accessibility isn't a compromise, it's the sharpest design constraint.",
+    title: "AI & Product Experiments",
+    body: "Building small, opinionated AI systems — Cognify Learning (collaborative AI tutoring) and adaptive-UX experiments — where clean logic meets real user context.",
     color: "#7B2CBF",
     span: "md:col-span-5",
     testId: "about-card-human",
   },
   {
     icon: Sparkles,
-    title: "Computer Vision & Research",
-    body: "Fake Image Detection (forensic pixel analysis) and Visual Fatigue Analyzer (blink + gaze telemetry) — I love turning raw signal into decisions humans can trust.",
+    title: "Research & Curiosity",
+    body: "MATLAB-based Fake Image Detection using frequency-domain analysis and forensic pixel signatures — I love turning research signals into things people can actually use.",
     color: "#39FF14",
     span: "md:col-span-7",
     testId: "about-card-play",
@@ -65,18 +65,21 @@ export default function About() {
               className="md:col-span-8 text-white/70 text-base md:text-lg leading-relaxed"
               data-testid="about-bio"
             >
-              I&apos;m Suhas — an engineer working at the intersection of{" "}
-              <span className="text-[#39FF14]">AI systems</span>,{" "}
-              <span className="text-[#FF00FF]">adaptive UX</span>, and honest,
-              well-crafted product engineering. I&apos;ve shipped AI tutors,
-              cognitive chatbots, computer-vision research prototypes, and full
-              production web apps — always with the same question in mind: how
-              does this feel in a real human&apos;s hands?
+              I&apos;m <span className="text-white font-semibold">Suhas S Kattimani</span>{" "}
+              — a final-year <span className="text-[#39FF14]">B.Tech Information
+              Science</span> student at Presidency University, Bengaluru
+              (Class of 2027). My foundation is Java and core DSA; my craft is{" "}
+              <span className="text-[#FF00FF]">frontend web development</span>{" "}
+              (HTML, CSS, JavaScript, React). I love the challenge of solving
+              hard algorithmic problems just as much as designing clean,
+              intuitive interfaces — and I&apos;m always looking for ways to
+              push my boundaries, optimize code, and pick up a new engineering
+              paradigm.
             </p>
             <p className="md:col-span-4 text-white/50 text-sm leading-relaxed font-mono">
-              Based in India · Available for freelance & full-time roles ·
-              Currently exploring agentic systems, on-device inference, and
-              accessibility-first design.
+              Based in Greater Bengaluru · Actively seeking remote internships,
+              frontend roles, and software engineering opportunities where I
+              can contribute Java + web development skills.
             </p>
           </div>
         </motion.div>
@@ -120,10 +123,10 @@ export default function About() {
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {[
-            { k: "12+", v: "Shipped Projects" },
-            { k: "5+", v: "Years Building" },
-            { k: "∞", v: "Curiosity Loops" },
-            { k: "24/7", v: "Ideation Mode" },
+            { k: "'27", v: "Class of" },
+            { k: "1", v: "Internship (CodeVertex)" },
+            { k: "10+", v: "Projects Shipped" },
+            { k: "BLR", v: "Based In Bengaluru" },
           ].map((s) => (
             <div
               key={s.v}

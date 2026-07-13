@@ -40,7 +40,7 @@ export default function Hero() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#39FF14] opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-[#39FF14]" />
         </span>
-        Available for freelance & full-time
+        Open to internships & remote roles
       </motion.div>
 
       {/* 3D avatar container */}
@@ -72,11 +72,10 @@ export default function Hero() {
         className="mt-6 text-white/70 text-center max-w-2xl text-base md:text-lg font-mono"
         data-testid="hero-tagline"
       >
-        Engineer building{" "}
-        <span className="text-[#FF00FF]">AI agents</span>, adaptive interfaces,
-        and{" "}
-        <span className="text-[#39FF14]">computer-vision systems</span> that
-        respect how people actually think.
+        Final-year Information Science student at Presidency University —
+        building <span className="text-[#FF00FF]">Java systems</span>, thoughtful
+        <span className="text-[#39FF14]"> frontend interfaces</span>, and small
+        AI experiments from Bengaluru.
       </motion.p>
 
       {/* Social row */}
