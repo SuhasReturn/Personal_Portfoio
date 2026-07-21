@@ -1,0 +1,204 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { Sparkles, Code2, Brain, Compass } from "lucide-react";
+
+const cards = [
+  {
+    icon: Brain,
+    title: "Java & Algorithms",
+    body: "Deep bench in Java and core Data Structures & Algorithms. I treat LeetCode as daily reps — clean, optimized, interview-grade patterns that scale beyond puzzles.",
+    color: "#39FF14",
+    span: "md:col-span-7",
+    testId: "about-card-java",
+  },
+  {
+    icon: Code2,
+    title: "Frontend Craft",
+    body: "HTML, CSS, JavaScript, React, TypeScript. Sharpened during a Frontend Web Developer internship at CodeVertex (Pune) and shipped in projects like FlowCell and Aureus.",
+    color: "#FF00FF",
+    span: "md:col-span-5",
+    testId: "about-card-frontend",
+  },
+  {
+    icon: Compass,
+    title: "AI & Product Experiments",
+    body: "Building small, opinionated AI systems — Cognify Learning (collaborative AI tutoring) and adaptive-UX experiments — where clean logic meets real user context.",
+    color: "#7B2CBF",
+    span: "md:col-span-5",
+    testId: "about-card-ai",
+  },
+  {
+    icon: Sparkles,
+    title: "Research & Curiosity",
+    body: "MATLAB-based Fake Image Detection using frequency-domain analysis and forensic pixel signatures — I love turning research signals into things people can actually use.",
+    color: "#39FF14",
+    span: "md:col-span-7",
+    testId: "about-card-research",
+  },
+];
+
+const toolkitCategories = [
+  { title: "Languages", items: ["Java", "JavaScript", "TypeScript", "Python", "MATLAB"] },
+  { title: "Frontend", items: ["React", "HTML5", "CSS3", "Tailwind", "Framer Motion"] },
+  { title: "Foundations", items: ["DSA", "OOP", "System Design", "Git", "REST"] },
+  { title: "Exploring", items: ["AI Agents", "LLM Tooling", "R3F", "FastAPI", "MongoDB"] },
+  { title: "Tools", items: ["VS Code", "Vercel", "GitHub", "Figma", "Postman"] },
+];
+
+export default function About() {
+  return (
+    <section
+      id="about"
+      data-testid="about-section"
+      className="relative min-h-screen w-full px-6 md:px-16 py-32"
+    >
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
+        >
+          <p className="font-mono text-xs uppercase tracking-[0.4em] text-[#39FF14] mb-4">
+            /01 — About
+          </p>
+          <h2 className="font-display text-5xl md:text-7xl font-black tracking-tighter max-w-4xl">
+            I engineer<br />
+            <span className="text-white/40">interfaces that</span>{" "}
+            <span className="text-[#FF00FF]">think back.</span>
+          </h2>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 max-w-5xl">
+            <p
+              className="md:col-span-8 text-white/70 text-base md:text-lg leading-relaxed"
+              data-testid="about-bio"
+            >
+              I&apos;m Suhas S Kattimani — a final-year{" "}
+              <span className="text-[#39FF14]">B.Tech Information Science</span>{" "}
+              student at Presidency University, Bengaluru (Class of 2027). My
+              foundation is Java and core DSA; my craft is{" "}
+              <span className="text-[#FF00FF]">frontend web development</span>{" "}
+              (HTML, CSS, JavaScript, React). I love the challenge of solving
+              hard algorithmic problems just as much as designing clean,
+              intuitive interfaces — and I&apos;m always looking for ways to push
+              my boundaries, optimize code, and pick up a new engineering
+              paradigm.
+            </p>
+            <p className="md:col-span-4 text-white/50 text-sm leading-relaxed font-mono">
+              Based in Greater Bengaluru · Actively seeking remote internships,
+              frontend roles, and software engineering opportunities where I can
+              contribute Java + web development skills.
+            </p>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {cards.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              className={`glass rounded-2xl p-8 ${c.span} relative overflow-hidden group`}
+              data-testid={c.testId}
+            >
+              <div
+                className="absolute -top-24 -right-24 w-48 h-48 rounded-full blur-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-500"
+                style={{ background: c.color }}
+              />
+              <c.icon
+                size={28}
+                style={{ color: c.color }}
+                className="mb-6 relative z-10"
+              />
+              <h3 className="font-display text-2xl md:text-3xl font-bold mb-3 relative z-10">
+                {c.title}
+              </h3>
+              <p className="text-white/60 text-base leading-relaxed relative z-10">
+                {c.body}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bio stats bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
+          {[
+            { k: "'27", v: "Class Of" },
+            { k: "1", v: "Internship (CodeVertex)" },
+            { k: "10+", v: "Projects Shipped" },
+            { k: "BLR", v: "Based In Bengaluru" },
+          ].map((s) => (
+            <div
+              key={s.v}
+              className="glass rounded-xl p-5"
+              data-testid={`stat-${s.v.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              <div className="font-display text-4xl md:text-5xl font-black text-[#39FF14]">
+                {s.k}
+              </div>
+              <div className="font-mono text-xs uppercase tracking-widest text-white/50 mt-2">
+                {s.v}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Toolkit subsection */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="mt-32"
+        >
+          <p className="font-mono text-xs uppercase tracking-[0.4em] text-[#39FF14] mb-4">
+            /01.5 — Toolkit
+          </p>
+          <h2 className="font-display text-5xl md:text-7xl font-black tracking-tighter max-w-4xl mb-4">
+            The stack I{" "}
+            <span className="text-[#FF00FF]">reach for.</span>
+          </h2>
+          <p className="font-mono text-xs uppercase tracking-widest text-white/50 mb-12 max-w-xl">
+            Sharpened through DSA reps, side projects, and one very good internship
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {toolkitCategories.map((cat, i) => (
+              <motion.div
+                key={cat.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="glass rounded-2xl p-6"
+                data-testid={`toolkit-${cat.title.toLowerCase()}`}
+              >
+                <h4 className="font-mono text-xs uppercase tracking-widest text-white/50 mb-4">
+                  {cat.title}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {cat.items.map((item) => (
+                    <span
+                      key={item}
+                      className="font-mono text-xs px-3 py-1.5 rounded-full border border-white/15 text-white/70 hover:border-[#39FF14]/50 hover:text-[#39FF14] transition-colors duration-300"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
